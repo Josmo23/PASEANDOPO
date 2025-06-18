@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puertas Mágicas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f9ff;
+        background-image: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+        overflow-x: hidden;
+    }
+    
+    .scratch-card-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px; /* Espacio entre cuadros */
+        max-width: 500px; /* Ancho máximo del contenedor */
+        margin: 0 auto;
+        padding: 25px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        background-image: radial-gradient(#e6f7ff 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    
+    .scratch-card {
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; /* Mantiene proporción cuadrada */
+        cursor: pointer;
+        perspective: 1000px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .scratch-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .scratch-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3.5rem; /* Emoji más grande */
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+    }
+    
+    .scratch-cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); /* Color gris */
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 2.8rem; /* Signo de interrogación grande */
+        backface-visibility: hidden;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        border: 2px solid #374151; /* Borde para mejor definición */
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .scratch-cover::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        border-radius: 12px;
+        pointer-events: none;
+    }
+    
+    .scratched .scratch-content {
+        transform: rotateY(180deg);
+    }
+    
+    .scratched .scratch-cover {
+        transform: rotateY(180deg);
+        pointer-events: none;
+    }
+    
+    .destination-card {
+        transition: all 0.3s ease;
+    }
+    
+    .destination-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .modal {
+        transition: opacity 0.3s ease;
+    }
+    
+    .game-title {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(90deg, #2563eb, #1d4ed8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+    
+    .attempts-badge {
+        background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        padding: 6px 16px;
+        border-radius: 20px;
+        color: white;
+        font-weight: 600;
+        display: inline-block;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Mejoras para móviles */
+    @media (max-width: 640px) {
+        .scratch-card-container {
+            gap: 15px;
+            max-width: 350px;
+            padding: 15px;
+        }
+        
+        .scratch-content {
+            font-size: 2.8rem;
+        }
+        
+        .scratch-cover {
+            font-size: 2.2rem;
+        }
+    }
+    
+    /* GitHub corner */
+    .github-corner:hover .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
+    
+    @keyframes octocat-wave {
+        0%, 100% { transform: rotate(0); }
+        20%, 60% { transform: rotate(-25deg); }
+        40%, 80% { transform: rotate(10deg); }
+    }
+    
+    @media (max-width: 500px) {
+        .github-corner:hover .octo-arm {
+            animation: none;
+        }
+        .github-corner .octo-arm {
+            animation: octocat-wave 560ms ease-in-out;
+        }
+    }
+</style>
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 shadow-lg">
+        <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-bold text-center sm:text-left mb-2 sm:mb-0">Tours Paseando por la Baja</h1>
+            <p class="text-sm md:text-base">¡Descubre la aventura!</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div id="login-section" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 mb-8">
+            <h2 class="text-xl font-semibold text-center text-blue-800 mb-4">Ingresa tus datos para jugar</h2>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label for="folio" class="block text-sm font-medium text-gray-700">Folio de Ingreso</label>
+                    <input type="text" id="folio" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Número de Teléfono (10 dígitos)</label>
+                    <input type="tel" id="phone" pattern="[0-9]{10}" maxlength="10" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                    <p class="text-xs text-gray-500 mt-1">Ejemplo: 6641234567</p>
+                </div>
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+                    <input type="text" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out">
+                    Comenzar a Jugar
+                </button>
+            </form>
+        </div>
+
+        <div id="game-section" class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 mb-8 hidden">
+            <h2 class="text-2xl font-bold text-center game-title mb-2">Juego de Rascadito</h2>
+            <p class="text-center text-gray-600 mb-4">Encuentra 3 figuras iguales para ganar un premio</p>
+            <div class="text-center mb-6">
+                <span class="attempts-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
+                    </svg>
+                    Oportunidades: <span id="attempts-left">2</span>
+                </span>
+            </div>
+            
+            <!-- Contenedor principal del juego con cuadros grises y más separados -->
+            <div class="scratch-card-container">
+                <div class="scratch-card" data-index="0">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+                <div class="scratch-card" data-index="1">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+                <div class="scratch-card" data-index="2">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+                <div class="scratch-card" data-index="3">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+                <div class="scratch-card" data-index="4">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+                <div class="scratch-card" data-index="5">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+                <div class="scratch-card" data-index="6">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+                <div class="scratch-card" data-index="7">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+                <div class="scratch-card" data-index="8">
+                    <div class="scratch-content"></div>
+                    <div class="scratch-cover">?</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button id="play-again" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out hidden">
+                    Jugar de Nuevo
+                </button>
+                <button id="restart-game" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out hidden">
+                    Volver al Inicio
+                </button>
+            </div>
+        </div>
+
+        <div id="destinations-section" class="py-8">
+            <h2 class="text-2xl font-bold text-center text-blue-800 mb-8">Nuestros Destinos</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-40 bg-blue-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">La Chinesca</h3>
+                        <p class="text-gray-600 text-sm">Explora la fascinante historia y cultura de la comunidad china en Baja California.</p>
+                    </div>
+                </div>
+                
+                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-40 bg-green-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 9v10a2 2 0 002 2h10a2 2 0 002-2V9m-17 0V5a2 2 0 012-2h10a2 2 0 012 2v4m-17 0h17" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">San Pedro Mártir</h3>
+                        <p class="text-gray-600 text-sm">Descubre la belleza natural del Parque Nacional Sierra de San Pedro Mártir.</p>
+                    </div>
+                </div>
+                
+                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-40 bg-yellow-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">San Quintín</h3>
+                        <p class="text-gray-600 text-sm">Visita las hermosas playas y viñedos de la región de San Quintín.</p>
+                    </div>
+                </div>
+                
+                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-40 bg-teal-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Humedales</h3>
+                        <p class="text-gray-600 text-sm">Explora los ecosistemas únicos de los humedales de Baja California.</p>
+                    </div>
+                </div>
+                
+                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-40 bg-red-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Aguas Termales</h3>
+                        <p class="text-gray-600 text-sm">Relájate en las aguas termales naturales con propiedades curativas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center bg-blue-50 p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold text-blue-800 mb-2">Puntos de Abordaje</h3>
+                <p class="text-gray-700">Nuestros tours salen desde:</p>
+                <ul class="mt-2 space-y-1">
+                    <li class="font-medium">Plaza 200</li>
+                    <li class="font-medium">Natura</li>
+                    <li class="font-medium">Sendero</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2023 Tours Paseando por la Baja - Todos los derechos reservados</p>
+            <p class="mt-2 text-sm text-blue-200">¡Te esperamos para que nos acompañes al próximo paseo por la Baja!</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Winner Modal -->
+<div id="winner-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+    <div class="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full mx-4">
+        <div class="text-center">
+            <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">¡Felicidades!</h3>
+            <p class="text-gray-600 mb-4">Has ganado:</p>
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-6 mb-6">
+                <p id="prize-name" class="text-2xl font-bold text-blue-800"></p>
+            </div>
+            <div class="space-y-3 text-left mb-6 bg-gray-50 p-4 rounded-lg">
+                <p><span class="font-semibold">Folio:</span> <span id="prize-folio"></span></p>
+                <p><span class="font-semibold">Nombre:</span> <span id="prize-name-value"></span></p>
+                <p><span class="font-semibold">Teléfono:</span> <span id="prize-phone"></span></p>
+            </div>
+            <button id="close-winner-modal" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Loser Modal -->
+<div id="loser-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+    <div class="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full mx-4">
+        <div class="text-center">
+            <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">¡Sigue intentando!</h3>
+            <p class="text-gray-600 mb-6">No has encontrado 3 figuras iguales. ¡Mejor suerte la próxima vez!</p>
+            <button id="close-loser-modal" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Game data
+    const CORRECT_FOLIO = "18062025";
+    const WINNING_PROBABILITY = 0.25;
+    const PRIZES = [
+        { name: "100 pesos de descuento", probability: 0.15 },
+        { name: "Paseo en barco gratis", probability: 0.20 },
+        { name: "Viaje gratis", probability: 0.10 },
+        { name: "Regalo sorpresa", probability: 0.20 },
+        { name: "Botella de vino", probability: 0.15 },
+        { name: "50 pesos de descuento", probability: 0.20 }
+    ];
+    
+    // Game state
+    let gameState = {
+        playerName: "",
+        playerPhone: "",
+        attemptsLeft: 2,
+        playedPhones: new Set(),
+        playedNames: new Set(),
+        currentSymbols: [],
+        scratchedCards: 0,
+        gameOver: false
+    };
+    
+    // DOM Elements
+    const loginSection = document.getElementById("login-section");
+    const gameSection = document.getElementById("game-section");
+    const loginForm = document.getElementById("login-form");
+    const folioInput = document.getElementById("folio");
+    const phoneInput = document.getElementById("phone");
+    const nameInput = document.getElementById("name");
+    const attemptsLeftSpan = document.getElementById("attempts-left");
+    const playAgainButton = document.getElementById("play-again");
+    const restartGameButton = document.getElementById("restart-game");
+    const winnerModal = document.getElementById("winner-modal");
+    const loserModal = document.getElementById("loser-modal");
+    const closeWinnerModalButton = document.getElementById("close-winner-modal");
+    const closeLoserModalButton = document.getElementById("close-loser-modal");
+    const prizeNameElement = document.getElementById("prize-name");
+    const prizeFolioElement = document.getElementById("prize-folio");
+    const prizeNameValueElement = document.getElementById("prize-name-value");
+    const prizePhoneElement = document.getElementById("prize-phone");
+    const scratchCards = document.querySelectorAll(".scratch-card");
+    
+    // Symbols for the game
+    const symbols = ["🌮", "🌵", "🏝️", "🌊", "🐬", "🐠"];
+    
+    // Initialize the game
+    function initGame() {
+        gameState.currentSymbols = [];
+        gameState.scratchedCards = 0;
+        gameState.gameOver = false;
+        
+        // Reset all cards
+        scratchCards.forEach(card => {
+            card.classList.remove("scratched");
+            card.querySelector(".scratch-content").textContent = "";
+        });
+        
+        // Determine if this game will be a winner
+        const isWinner = Math.random() < WINNING_PROBABILITY;
+        
+        if (isWinner) {
+            // Select a random symbol for the winning combination
+            const winningSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            // Place 3 winning symbols
+            const positions = shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]).slice(0, 9);
+            
+            for (let i = 0; i < 9; i++) {
+                if (i < 3) {
+                    // Place winning symbols in the first 3 positions
+                    gameState.currentSymbols[positions[i]] = winningSymbol;
+                } else {
+                    // Fill the rest with random different symbols
+                    let randomSymbol;
+                    do {
+                        randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                    } while (randomSymbol === winningSymbol);
+                    gameState.currentSymbols[positions[i]] = randomSymbol;
+                }
+            }
+        } else {
+            // Create a non-winning combination
+            // Ensure no symbol appears more than twice
+            const symbolCounts = {};
+            symbols.forEach(symbol => symbolCounts[symbol] = 0);
+            
+            for (let i = 0; i < 9; i++) {
+                let availableSymbols = symbols.filter(symbol => symbolCounts[symbol] < 2);
+                
+                // If we've used all symbols twice, reset
+                if (availableSymbols.length === 0) {
+                    symbols.forEach(symbol => symbolCounts[symbol] = 0);
+                    availableSymbols = symbols;
+                }
+                
+                const randomSymbol = availableSymbols[Math.floor(Math.random() * availableSymbols.length)];
+                gameState.currentSymbols[i] = randomSymbol;
+                symbolCounts[randomSymbol]++;
+            }
+        }
+    }
+    
+    // Check if the player has won
+    function checkWin() {
+        const scratchedSymbols = [];
+        const symbolCounts = {};
+        
+        scratchCards.forEach(card => {
+            if (card.classList.contains("scratched")) {
+                const symbol = card.querySelector(".scratch-content").textContent;
+                scratchedSymbols.push(symbol);
+                symbolCounts[symbol] = (symbolCounts[symbol] || 0) + 1;
+            }
+        });
+        
+        // Check if any symbol appears 3 times
+        for (const symbol in symbolCounts) {
+            if (symbolCounts[symbol] >= 3) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    // Select a random prize based on probabilities
+    function selectPrize() {
+        const rand = Math.random();
+        let cumulativeProbability = 0;
+        
+        for (const prize of PRIZES) {
+            cumulativeProbability += prize.probability;
+            if (rand < cumulativeProbability) {
+                return prize.name;
+            }
+        }
+        
+        // Fallback
+        return PRIZES[0].name;
+    }
+    
+    // Generate a random 5-digit folio
+    function generateFolio() {
+        return Math.floor(10000 + Math.random() * 90000).toString();
+    }
+    
+    // Shuffle array (Fisher-Yates algorithm)
+    function shuffleArray(array) {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+    }
+    
+    // Event Listeners
+    loginForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        const folio = folioInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const name = nameInput.value.trim();
+        
+        // Validate folio
+        if (folio !== CORRECT_FOLIO) {
+            alert("Folio incorrecto. Por favor intenta de nuevo.");
+            return;
+        }
+        
+        // Validate phone number
+        if (!/^\d{10}$/.test(phone)) {
+            alert("Por favor ingresa un número de teléfono válido de 10 dígitos.");
+            return;
+        }
+        
+        // Check if phone or name has already played
+        if (gameState.playedPhones.has(phone)) {
+            alert("Este número de teléfono ya ha participado.");
+            return;
+        }
+        
+        if (gameState.playedNames.has(name)) {
+            alert("Este nombre ya ha participado.");
+            return;
+        }
+        
+        // Save player info
+        gameState.playerName = name;
+        gameState.playerPhone = phone;
+        gameState.attemptsLeft = 2;
+        
+        // Add to played sets
+        gameState.playedPhones.add(phone);
+        gameState.playedNames.add(name);
+        
+        // Update UI
+        attemptsLeftSpan.textContent = gameState.attemptsLeft;
+        
+        // Hide login, show game
+        loginSection.classList.add("hidden");
+        gameSection.classList.remove("hidden");
+        
+        // Initialize the game
+        initGame();
+    });
+    
+    // Scratch card event
+    scratchCards.forEach(card => {
+        card.addEventListener("click", function() {
+            if (gameState.gameOver || card.classList.contains("scratched")) {
+                return;
+            }
+            
+            const index = parseInt(card.dataset.index);
+            const symbol = gameState.currentSymbols[index];
+            
+            // Reveal the symbol
+            card.classList.add("scratched");
+            card.querySelector(".scratch-content").textContent = symbol;
+            
+            gameState.scratchedCards++;
+            
+            // Check if all cards are scratched or if player has won
+            if (gameState.scratchedCards === 9 || checkWin()) {
+                gameState.gameOver = true;
+                
+                setTimeout(() => {
+                    const hasWon = checkWin();
+                    
+                    if (hasWon) {
+                        // Show winner modal
+                        const prize = selectPrize();
+                        const folio = generateFolio();
+                        
+                        prizeNameElement.textContent = prize;
+                        prizeFolioElement.textContent = folio;
+                        prizeNameValueElement.textContent = gameState.playerName;
+                        prizePhoneElement.textContent = gameState.playerPhone;
+                        
+                        winnerModal.classList.remove("hidden");
+                    } else {
+                        // Show loser modal
+                        loserModal.classList.remove("hidden");
+                    }
+                    
+                    // Decrement attempts
+                    gameState.attemptsLeft--;
+                    attemptsLeftSpan.textContent = gameState.attemptsLeft;
+                    
+                    // Show appropriate buttons
+                    if (gameState.attemptsLeft > 0) {
+                        playAgainButton.classList.remove("hidden");
+                    } else {
+                        restartGameButton.classList.remove("hidden");
+                    }
+                }, 500);
+            }
+        });
+    });
+    
+    // Add touch support for mobile devices
+    scratchCards.forEach(card => {
+        card.addEventListener("touchstart", function(e) {
+            e.preventDefault(); // Prevent scrolling when touching the card
+        });
+    });
+    
+    // Play again button
+    playAgainButton.addEventListener("click", function() {
+        playAgainButton.classList.add("hidden");
+        initGame();
+    });
+    
+    // Restart game button
+    restartGameButton.addEventListener("click", function() {
+        gameSection.classList.add("hidden");
+        loginSection.classList.remove("hidden");
+        restartGameButton.classList.add("hidden");
+        
+        // Reset form
+        loginForm.reset();
+    });
+    
+    // Close modal buttons
+    closeWinnerModalButton.addEventListener("click", function() {
+        winnerModal.classList.add("hidden");
+    });
+    
+    closeLoserModalButton.addEventListener("click", function() {
+        loserModal.classList.add("hidden");
+    });
+    
+    // Close modals when clicking outside
+    window.addEventListener("click", function(e) {
+        if (e.target === winnerModal) {
+            winnerModal.classList.add("hidden");
+        }
+        if (e.target === loserModal) {
+            loserModal.classList.add("hidden");
+        }
+    });
+    
+    // Prevent zooming on mobile when focusing inputs
+    const viewportMeta = document.createElement('meta');
+    viewportMeta.name = 'viewport';
+    viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
+    document.getElementsByTagName('head')[0].appendChild(viewportMeta);
+    
+    // Añadir efecto de brillo al pasar el cursor por los cuadros
+    scratchCards.forEach(card => {
+        card.addEventListener("mouseover", function() {
+            if (!card.classList.contains("scratched")) {
+                card.querySelector(".scratch-cover").style.boxShadow = "0 0 15px rgba(255, 255, 255, 0.5), 0 6px 12px rgba(0, 0, 0, 0.15)";
+            }
+        });
+        
+        card.addEventListener("mouseout", function() {
+            if (!card.classList.contains("scratched")) {
+                card.querySelector(".scratch-cover").style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.15)";
+            }
+        });
+    });
+</script>
+</body>
+</html>
