@@ -7,41 +7,167 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
     <style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #f0f9ff;
-        background-image: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
-        overflow-x: hidden;
+     :root {
+        --primary: #FF6B35;
+        --secondary: #2EC4B6;
+        --accent: #FFBF69;
+        --dark: #011627;
+        --light: #FDFFFC;
     }
     
-    .scratch-card-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px; /* Espacio entre cuadros */
-        max-width: 500px; /* Ancho máximo del contenedor */
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, var(--dark), #023E8A);
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: var(--light);
+    }
+    
+    .container {
+        max-width: 600px;
         margin: 0 auto;
-        padding: 25px;
-        background-color: #ffffff;
+        padding: 20px;
+    }
+    
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
         border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        background-image: radial-gradient(#e6f7ff 1px, transparent 1px);
-        background-size: 20px 20px;
+        padding: 30px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--accent);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--light);
+    }
+    
+    .input-group {
+        margin-bottom: 20px;
+    }
+    
+    .input-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+    
+    .input-field {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--light);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .input-field:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(255, 191, 105, 0.3);
+    }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        border-radius: 10px;
+        border: none;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn-primary {
+        background: var(--primary);
+        color: var(--light);
+        box-shadow: 0 4px 10px rgba(255, 107, 53, 0.4);
+    }
+    
+    .btn-primary:hover {
+        background: #FF8157;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(255, 107, 53, 0.5);
+    }
+    
+    .btn-secondary {
+        background: var(--secondary);
+        color: var(--light);
+        box-shadow: 0 4px 10px rgba(46, 196, 182, 0.4);
+    }
+    
+    .btn-secondary:hover {
+        background: #3DD6C8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(46, 196, 182, 0.5);
+    }
+    
+    .btn-danger {
+        background: #e63946;
+        color: var(--light);
+        box-shadow: 0 4px 10px rgba(230, 57, 70, 0.4);
+    }
+    
+    .btn-danger:hover {
+        background: #f25c69;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(230, 57, 70, 0.5);
     }
     
     .scratch-card {
         position: relative;
         width: 100%;
-        padding-bottom: 100%; /* Mantiene proporción cuadrada */
-        cursor: pointer;
-        perspective: 1000px;
-        border-radius: 12px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
+        height: 300px;
+        margin: 30px 0;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
     
-    .scratch-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    .scratch-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        z-index: 10;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--light);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        transition: transform 0.5s ease;
+    }
+    
+    .scratch-overlay:hover {
+        transform: scale(0.98);
+    }
+    
+    .scratch-overlay:active {
+        transform: scale(0.95);
     }
     
     .scratch-content {
@@ -51,674 +177,649 @@
         width: 100%;
         height: 100%;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-size: 3.5rem; /* Emoji más grande */
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
-        transform-style: preserve-3d;
-        transition: transform 0.6s;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        color: var(--dark);
+        padding: 20px;
     }
     
-    .scratch-cover {
-        position: absolute;
+    .prize-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        animation: bounce 1s ease infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+    
+    .prize-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .prize-description {
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    .result-card {
+        background: linear-gradient(135deg, var(--accent), var(--primary));
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        color: var(--dark);
+    }
+    
+    .result-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: var(--dark);
+    }
+    
+    .result-info {
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+    
+    .result-folio {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 20px 0;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        letter-spacing: 3px;
+    }
+    
+    .result-instruction {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+    
+    .wave-bg {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%232EC4B6' fill-opacity='0.5' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,202.7C672,203,768,181,864,181.3C960,181,1056,203,1152,202.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+        z-index: -1;
+    }
+    
+    .palm-tree {
+        position: fixed;
+        bottom: 0;
+        width: 150px;
+        height: 200px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23795548' d='M45,40 L55,40 L55,100 L45,100 Z'/%3E%3Cpath fill='%234CAF50' d='M50,10 C60,25 80,15 70,35 C90,25 75,45 60,40 C75,50 65,60 50,45 C35,60 25,50 40,40 C25,45 10,25 30,35 C20,15 40,25 50,10 Z'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        z-index: -1;
+        opacity: 0.7;
+    }
+    
+    .palm-left {
+        left: 5%;
+    }
+    
+    .palm-right {
+        right: 5%;
+        transform: scaleX(-1);
+    }
+    
+    .scratch-effect {
+        animation: scratch 0.5s ease-out;
+    }
+    
+    @keyframes scratch {
+        0% {
+            opacity: 1;
+            transform: translateY(0) rotate(0);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-20px) rotate(-5deg);
+        }
+    }
+    
+    .modal {
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); /* Color gris */
-        border-radius: 12px;
+        background-color: rgba(0, 0, 0, 0.7);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
-        font-weight: bold;
-        font-size: 2.8rem; /* Signo de interrogación grande */
-        backface-visibility: hidden;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        border: 2px solid #374151; /* Borde para mejor definición */
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    .scratch-cover::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
-        border-radius: 12px;
-        pointer-events: none;
-    }
-    
-    .scratched .scratch-content {
-        transform: rotateY(180deg);
-    }
-    
-    .scratched .scratch-cover {
-        transform: rotateY(180deg);
-        pointer-events: none;
-    }
-    
-    .destination-card {
+        z-index: 100;
+        opacity: 0;
+        visibility: hidden;
         transition: all 0.3s ease;
     }
     
-    .destination-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    .modal.active {
+        opacity: 1;
+        visibility: visible;
     }
     
-    .modal {
-        transition: opacity 0.3s ease;
+    .modal-content {
+        background: linear-gradient(135deg, var(--dark), #023E8A);
+        border-radius: 15px;
+        padding: 30px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transform: translateY(20px);
+        transition: all 0.3s ease;
     }
     
-    .game-title {
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        background: linear-gradient(90deg, #2563eb, #1d4ed8);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-fill-color: transparent;
+    .modal.active .modal-content {
+        transform: translateY(0);
     }
     
-    .attempts-badge {
-        background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-        padding: 6px 16px;
-        border-radius: 20px;
-        color: white;
+    .modal-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--accent);
+        text-align: center;
+    }
+    
+    .modal-text {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+        text-align: center;
+        line-height: 1.6;
+    }
+    
+    .modal-buttons {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .modal-btn {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
         font-weight: 600;
-        display: inline-block;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
     }
     
-    /* Mejoras para móviles */
+    .modal-btn-primary {
+        background: var(--primary);
+        color: var(--light);
+    }
+    
+    .modal-btn-secondary {
+        background: var(--secondary);
+        color: var(--light);
+    }
+    
+    .prize-highlight {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.2rem;
+    }
+    
     @media (max-width: 640px) {
-        .scratch-card-container {
-            gap: 15px;
-            max-width: 350px;
-            padding: 15px;
+        .title {
+            font-size: 2rem;
         }
         
-        .scratch-content {
-            font-size: 2.8rem;
+        .subtitle {
+            font-size: 1rem;
         }
         
-        .scratch-cover {
-            font-size: 2.2rem;
+        .scratch-card {
+            height: 250px;
         }
-    }
-    
-    /* GitHub corner */
-    .github-corner:hover .octo-arm {
-        animation: octocat-wave 560ms ease-in-out;
-    }
-    
-    @keyframes octocat-wave {
-        0%, 100% { transform: rotate(0); }
-        20%, 60% { transform: rotate(-25deg); }
-        40%, 80% { transform: rotate(10deg); }
-    }
-    
-    @media (max-width: 500px) {
-        .github-corner:hover .octo-arm {
-            animation: none;
+        
+        .palm-tree {
+            width: 100px;
+            height: 150px;
         }
-        .github-corner .octo-arm {
-            animation: octocat-wave 560ms ease-in-out;
+        
+        .modal-title {
+            font-size: 1.5rem;
+        }
+        
+        .modal-text {
+            font-size: 1rem;
+        }
+        
+        .modal-buttons {
+            flex-direction: column;
         }
     }
 </style>
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 shadow-lg">
-        <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
-            <h1 class="text-2xl md:text-3xl font-bold text-center sm:text-left mb-2 sm:mb-0">Tours Paseando por la Baja</h1>
-            <p class="text-sm md:text-base">¡Descubre la aventura!</p>
+<div class="container py-8">
+    <div id="login-screen" class="card">
+        <h1 class="title">Paseando por la Baja</h1>
+        <p class="subtitle">¡Rasca y gana increíbles premios!</p>
+        
+        <div class="input-group">
+            <label for="phrase" class="input-label">Ingresa la frase secreta:</label>
+            <input type="text" id="phrase" class="input-field" placeholder="Escribe la frase secreta...">
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-        <div id="login-section" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 mb-8">
-            <h2 class="text-xl font-semibold text-center text-blue-800 mb-4">Ingresa tus datos para jugar</h2>
-            <form id="login-form" class="space-y-4">
-                <div>
-                    <label for="folio" class="block text-sm font-medium text-gray-700">Folio de Ingreso</label>
-                    <input type="text" id="folio" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
-                </div>
-                <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Número de Teléfono (10 dígitos)</label>
-                    <input type="tel" id="phone" pattern="[0-9]{10}" maxlength="10" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
-                    <p class="text-xs text-gray-500 mt-1">Ejemplo: 6641234567</p>
-                </div>
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
-                    <input type="text" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out">
-                    Comenzar a Jugar
-                </button>
-            </form>
+        
+        <div class="input-group">
+            <label for="name" class="input-label">Nombre completo:</label>
+            <input type="text" id="name" class="input-field" placeholder="Tu nombre...">
         </div>
-
-        <div id="game-section" class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 mb-8 hidden">
-            <h2 class="text-2xl font-bold text-center game-title mb-2">Juego de Rascadito</h2>
-            <p class="text-center text-gray-600 mb-4">Encuentra 3 figuras iguales para ganar un premio</p>
-            <div class="text-center mb-6">
-                <span class="attempts-badge">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
-                    </svg>
-                    Oportunidades: <span id="attempts-left">2</span>
-                </span>
-            </div>
-            
-            <!-- Contenedor principal del juego con cuadros grises y más separados -->
-            <div class="scratch-card-container">
-                <div class="scratch-card" data-index="0">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-                <div class="scratch-card" data-index="1">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-                <div class="scratch-card" data-index="2">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-                <div class="scratch-card" data-index="3">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-                <div class="scratch-card" data-index="4">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-                <div class="scratch-card" data-index="5">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-                <div class="scratch-card" data-index="6">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-                <div class="scratch-card" data-index="7">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-                <div class="scratch-card" data-index="8">
-                    <div class="scratch-content"></div>
-                    <div class="scratch-cover">?</div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-8">
-                <button id="play-again" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out hidden">
-                    Jugar de Nuevo
-                </button>
-                <button id="restart-game" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out hidden">
-                    Volver al Inicio
-                </button>
-            </div>
+        
+        <div class="input-group">
+            <label for="phone" class="input-label">Número de teléfono (10 dígitos):</label>
+            <input type="tel" id="phone" class="input-field" placeholder="Tu número de teléfono..." maxlength="10">
         </div>
-
-        <div id="destinations-section" class="py-8">
-            <h2 class="text-2xl font-bold text-center text-blue-800 mb-8">Nuestros Destinos</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="h-40 bg-blue-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">La Chinesca</h3>
-                        <p class="text-gray-600 text-sm">Explora la fascinante historia y cultura de la comunidad china en Baja California.</p>
-                    </div>
-                </div>
-                
-                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="h-40 bg-green-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 9v10a2 2 0 002 2h10a2 2 0 002-2V9m-17 0V5a2 2 0 012-2h10a2 2 0 012 2v4m-17 0h17" />
-                        </svg>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">San Pedro Mártir</h3>
-                        <p class="text-gray-600 text-sm">Descubre la belleza natural del Parque Nacional Sierra de San Pedro Mártir.</p>
-                    </div>
-                </div>
-                
-                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="h-40 bg-yellow-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">San Quintín</h3>
-                        <p class="text-gray-600 text-sm">Visita las hermosas playas y viñedos de la región de San Quintín.</p>
-                    </div>
-                </div>
-                
-                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="h-40 bg-teal-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                        </svg>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Humedales</h3>
-                        <p class="text-gray-600 text-sm">Explora los ecosistemas únicos de los humedales de Baja California.</p>
-                    </div>
-                </div>
-                
-                <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="h-40 bg-red-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Aguas Termales</h3>
-                        <p class="text-gray-600 text-sm">Relájate en las aguas termales naturales con propiedades curativas.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-10 text-center bg-blue-50 p-6 rounded-lg shadow-sm">
-                <h3 class="text-xl font-semibold text-blue-800 mb-2">Puntos de Abordaje</h3>
-                <p class="text-gray-700">Nuestros tours salen desde:</p>
-                <ul class="mt-2 space-y-1">
-                    <li class="font-medium">Plaza 200</li>
-                    <li class="font-medium">Natura</li>
-                    <li class="font-medium">Sendero</li>
-                </ul>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p>© 2023 Tours Paseando por la Baja - Todos los derechos reservados</p>
-            <p class="mt-2 text-sm text-blue-200">¡Te esperamos para que nos acompañes al próximo paseo por la Baja!</p>
-        </div>
-    </footer>
-</div>
-
-<!-- Winner Modal -->
-<div id="winner-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
-    <div class="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full mx-4">
-        <div class="text-center">
-            <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-2">¡Felicidades!</h3>
-            <p class="text-gray-600 mb-4">Has ganado:</p>
-            <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-6 mb-6">
-                <p id="prize-name" class="text-2xl font-bold text-blue-800"></p>
-            </div>
-            <div class="space-y-3 text-left mb-6 bg-gray-50 p-4 rounded-lg">
-                <p><span class="font-semibold">Folio:</span> <span id="prize-folio"></span></p>
-                <p><span class="font-semibold">Nombre:</span> <span id="prize-name-value"></span></p>
-                <p><span class="font-semibold">Teléfono:</span> <span id="prize-phone"></span></p>
-            </div>
-            <button id="close-winner-modal" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out">
-                Cerrar
-            </button>
-        </div>
+        
+        <button id="start-btn" class="btn btn-primary">Comenzar</button>
     </div>
-</div>
-
-<!-- Loser Modal -->
-<div id="loser-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
-    <div class="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full mx-4">
-        <div class="text-center">
-            <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+    
+    <div id="game-screen" class="card" style="display: none;">
+        <h1 class="title">Paseando por la Baja</h1>
+        <p class="subtitle">¡Rasca la tarjeta para descubrir tu premio!</p>
+        
+        <div id="scratch-card" class="scratch-card">
+            <div id="scratch-overlay" class="scratch-overlay">
+                <span>¡RASCA AQUÍ!</span>
             </div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-4">¡Sigue intentando!</h3>
-            <p class="text-gray-600 mb-6">No has encontrado 3 figuras iguales. ¡Mejor suerte la próxima vez!</p>
-            <button id="close-loser-modal" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out">
-                Cerrar
-            </button>
+            <div id="scratch-content" class="scratch-content">
+                <!-- El contenido se llenará dinámicamente -->
+            </div>
+        </div>
+        
+        <p id="attempts-left" class="text-center mb-4">Intentos restantes: <span id="attempts-count">2</span></p>
+        
+        <button id="play-again-btn" class="btn btn-secondary mb-4" style="display: none;">Jugar de nuevo</button>
+        <button id="claim-btn" class="btn btn-primary" style="display: none;">Reclamar premio</button>
+    </div>
+    
+    <div id="result-screen" class="card" style="display: none;">
+        <div class="result-card">
+            <h2 class="result-title">¡Toma una captura de pantalla!</h2>
+            
+            <div class="result-info">
+                <strong>Nombre:</strong> <span id="result-name"></span>
+            </div>
+            
+            <div class="result-info">
+                <strong>Teléfono:</strong> <span id="result-phone"></span>
+            </div>
+            
+            <div class="result-info">
+                <strong>Premio:</strong> <span id="result-prize"></span>
+            </div>
+            
+            <div class="result-folio" id="result-folio"></div>
+            
+            <p class="result-instruction">Presenta esta captura para reclamar tu premio</p>
+        </div>
+        
+        <button id="new-game-btn" class="btn btn-secondary mt-6">Nuevo juego</button>
+    </div>
+    
+    <!-- Modal para preguntar si quiere arriesgarse -->
+    <div id="risk-modal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">¡Felicidades! Has ganado un premio</h3>
+            <p class="modal-text">
+                Has ganado: <span id="current-prize" class="prize-highlight"></span>
+                <br><br>
+                ¿Quieres arriesgarte a intentar ganar un premio mayor?
+                <br><br>
+                <strong>¡Cuidado!</strong> Si pierdes, no ganarás nada.
+            </p>
+            <div class="modal-buttons">
+                <button id="risk-yes-btn" class="modal-btn modal-btn-primary">¡Sí, quiero arriesgarme!</button>
+                <button id="risk-no-btn" class="modal-btn modal-btn-secondary">No, me quedo con mi premio</button>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Game data
-    const CORRECT_FOLIO = "18062025";
-    const WINNING_PROBABILITY = 0.25;
-    const PRIZES = [
-        { name: "100 pesos de descuento", probability: 0.15 },
-        { name: "Paseo en barco gratis", probability: 0.20 },
-        { name: "Viaje gratis", probability: 0.10 },
-        { name: "Regalo sorpresa", probability: 0.20 },
-        { name: "Botella de vino", probability: 0.15 },
-        { name: "50 pesos de descuento", probability: 0.20 }
-    ];
-    
-    // Game state
-    let gameState = {
-        playerName: "",
-        playerPhone: "",
-        attemptsLeft: 2,
-        playedPhones: new Set(),
-        playedNames: new Set(),
-        currentSymbols: [],
-        scratchedCards: 0,
-        gameOver: false
-    };
-    
-    // DOM Elements
-    const loginSection = document.getElementById("login-section");
-    const gameSection = document.getElementById("game-section");
-    const loginForm = document.getElementById("login-form");
-    const folioInput = document.getElementById("folio");
-    const phoneInput = document.getElementById("phone");
-    const nameInput = document.getElementById("name");
-    const attemptsLeftSpan = document.getElementById("attempts-left");
-    const playAgainButton = document.getElementById("play-again");
-    const restartGameButton = document.getElementById("restart-game");
-    const winnerModal = document.getElementById("winner-modal");
-    const loserModal = document.getElementById("loser-modal");
-    const closeWinnerModalButton = document.getElementById("close-winner-modal");
-    const closeLoserModalButton = document.getElementById("close-loser-modal");
-    const prizeNameElement = document.getElementById("prize-name");
-    const prizeFolioElement = document.getElementById("prize-folio");
-    const prizeNameValueElement = document.getElementById("prize-name-value");
-    const prizePhoneElement = document.getElementById("prize-phone");
-    const scratchCards = document.querySelectorAll(".scratch-card");
-    
-    // Symbols for the game
-    const symbols = ["🌮", "🌵", "🏝️", "🌊", "🐬", "🐠"];
-    
-    // Initialize the game
-    function initGame() {
-        gameState.currentSymbols = [];
-        gameState.scratchedCards = 0;
-        gameState.gameOver = false;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Variables globales
+        const correctPhrase = "Yo paseo por la baja";
+        const phoneAttempts = {};
+        let currentPhone = "";
+        let currentName = "";
+        let attemptsLeft = 2;
+        let currentPrize = "";
+        let currentPrizeObj = null;
+        let isFirstAttempt = true;
         
-        // Reset all cards
-        scratchCards.forEach(card => {
-            card.classList.remove("scratched");
-            card.querySelector(".scratch-content").textContent = "";
-        });
+        // Elementos DOM
+        const loginScreen = document.getElementById('login-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const startBtn = document.getElementById('start-btn');
+        const scratchOverlay = document.getElementById('scratch-overlay');
+        const scratchContent = document.getElementById('scratch-content');
+        const attemptsCount = document.getElementById('attempts-count');
+        const playAgainBtn = document.getElementById('play-again-btn');
+        const claimBtn = document.getElementById('claim-btn');
+        const newGameBtn = document.getElementById('new-game-btn');
+        const riskModal = document.getElementById('risk-modal');
+        const currentPrizeSpan = document.getElementById('current-prize');
+        const riskYesBtn = document.getElementById('risk-yes-btn');
+        const riskNoBtn = document.getElementById('risk-no-btn');
         
-        // Determine if this game will be a winner
-        const isWinner = Math.random() < WINNING_PROBABILITY;
+        // Premios disponibles
+        const prizes = [
+            { name: "50 pesos de descuento", probability: 0.12, icon: "💰", description: "¡Felicidades! Has ganado $50 de descuento en tu próxima compra.", value: 1 },
+            { name: "100 pesos de descuento", probability: 0.08, icon: "💵", description: "¡Increíble! Has ganado $100 de descuento en tu próxima compra.", value: 2 },
+            { name: "Paseo en barco", probability: 0.03, icon: "🚢", description: "¡Wow! Has ganado un paseo en barco para disfrutar del mar.", value: 3 },
+            { name: "Vino gratis", probability: 0.03, icon: "🍷", description: "¡Salud! Has ganado una botella de vino para brindar.", value: 3 },
+            { name: "¡VIAJE GRATIS!", probability: 0.02, icon: "✈️", description: "¡FELICIDADES! Has ganado el PREMIO MAYOR: ¡Un viaje gratis!", value: 5 }
+        ];
         
-        if (isWinner) {
-            // Select a random symbol for the winning combination
-            const winningSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+        // Premios mayores para el segundo intento
+        const majorPrizes = [
+            { name: "¡VIAJE GRATIS!", probability: 0.3, icon: "✈️", description: "¡FELICIDADES! Has ganado el PREMIO MAYOR: ¡Un viaje gratis!", value: 5 },
+            { name: "Cena para dos", probability: 0.3, icon: "🍽️", description: "¡Excelente! Has ganado una cena romántica para dos personas.", value: 4 },
+            { name: "Tour completo", probability: 0.4, icon: "🏞️", description: "¡Genial! Has ganado un tour completo por La Baja.", value: 4 }
+        ];
+        
+        // Inicializar eventos
+        function init() {
+            startBtn.addEventListener('click', validateAndStart);
+            scratchOverlay.addEventListener('click', revealPrize);
+            playAgainBtn.addEventListener('click', resetGame);
+            claimBtn.addEventListener('click', showResult);
+            newGameBtn.addEventListener('click', startNewGame);
+            riskYesBtn.addEventListener('click', takeRisk);
+            riskNoBtn.addEventListener('click', keepPrize);
             
-            // Place 3 winning symbols
-            const positions = shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]).slice(0, 9);
+            // Seguridad básica
+            addBasicSecurity();
+        }
+        
+        // Validar datos y comenzar juego
+        function validateAndStart() {
+            const phraseInput = document.getElementById('phrase').value.trim();
+            currentName = document.getElementById('name').value.trim();
+            currentPhone = document.getElementById('phone').value.trim();
             
-            for (let i = 0; i < 9; i++) {
-                if (i < 3) {
-                    // Place winning symbols in the first 3 positions
-                    gameState.currentSymbols[positions[i]] = winningSymbol;
-                } else {
-                    // Fill the rest with random different symbols
-                    let randomSymbol;
-                    do {
-                        randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
-                    } while (randomSymbol === winningSymbol);
-                    gameState.currentSymbols[positions[i]] = randomSymbol;
-                }
-            }
-        } else {
-            // Create a non-winning combination
-            // Ensure no symbol appears more than twice
-            const symbolCounts = {};
-            symbols.forEach(symbol => symbolCounts[symbol] = 0);
-            
-            for (let i = 0; i < 9; i++) {
-                let availableSymbols = symbols.filter(symbol => symbolCounts[symbol] < 2);
-                
-                // If we've used all symbols twice, reset
-                if (availableSymbols.length === 0) {
-                    symbols.forEach(symbol => symbolCounts[symbol] = 0);
-                    availableSymbols = symbols;
-                }
-                
-                const randomSymbol = availableSymbols[Math.floor(Math.random() * availableSymbols.length)];
-                gameState.currentSymbols[i] = randomSymbol;
-                symbolCounts[randomSymbol]++;
-            }
-        }
-    }
-    
-    // Check if the player has won
-    function checkWin() {
-        const scratchedSymbols = [];
-        const symbolCounts = {};
-        
-        scratchCards.forEach(card => {
-            if (card.classList.contains("scratched")) {
-                const symbol = card.querySelector(".scratch-content").textContent;
-                scratchedSymbols.push(symbol);
-                symbolCounts[symbol] = (symbolCounts[symbol] || 0) + 1;
-            }
-        });
-        
-        // Check if any symbol appears 3 times
-        for (const symbol in symbolCounts) {
-            if (symbolCounts[symbol] >= 3) {
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    
-    // Select a random prize based on probabilities
-    function selectPrize() {
-        const rand = Math.random();
-        let cumulativeProbability = 0;
-        
-        for (const prize of PRIZES) {
-            cumulativeProbability += prize.probability;
-            if (rand < cumulativeProbability) {
-                return prize.name;
-            }
-        }
-        
-        // Fallback
-        return PRIZES[0].name;
-    }
-    
-    // Generate a random 5-digit folio
-    function generateFolio() {
-        return Math.floor(10000 + Math.random() * 90000).toString();
-    }
-    
-    // Shuffle array (Fisher-Yates algorithm)
-    function shuffleArray(array) {
-        const newArray = [...array];
-        for (let i = newArray.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-        }
-        return newArray;
-    }
-    
-    // Event Listeners
-    loginForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        
-        const folio = folioInput.value.trim();
-        const phone = phoneInput.value.trim();
-        const name = nameInput.value.trim();
-        
-        // Validate folio
-        if (folio !== CORRECT_FOLIO) {
-            alert("Folio incorrecto. Por favor intenta de nuevo.");
-            return;
-        }
-        
-        // Validate phone number
-        if (!/^\d{10}$/.test(phone)) {
-            alert("Por favor ingresa un número de teléfono válido de 10 dígitos.");
-            return;
-        }
-        
-        // Check if phone or name has already played
-        if (gameState.playedPhones.has(phone)) {
-            alert("Este número de teléfono ya ha participado.");
-            return;
-        }
-        
-        if (gameState.playedNames.has(name)) {
-            alert("Este nombre ya ha participado.");
-            return;
-        }
-        
-        // Save player info
-        gameState.playerName = name;
-        gameState.playerPhone = phone;
-        gameState.attemptsLeft = 2;
-        
-        // Add to played sets
-        gameState.playedPhones.add(phone);
-        gameState.playedNames.add(name);
-        
-        // Update UI
-        attemptsLeftSpan.textContent = gameState.attemptsLeft;
-        
-        // Hide login, show game
-        loginSection.classList.add("hidden");
-        gameSection.classList.remove("hidden");
-        
-        // Initialize the game
-        initGame();
-    });
-    
-    // Scratch card event
-    scratchCards.forEach(card => {
-        card.addEventListener("click", function() {
-            if (gameState.gameOver || card.classList.contains("scratched")) {
+            // Validar frase secreta
+            if (phraseInput.toLowerCase() !== correctPhrase.toLowerCase()) {
+                alert("Frase secreta incorrecta. Inténtalo de nuevo.");
                 return;
             }
             
-            const index = parseInt(card.dataset.index);
-            const symbol = gameState.currentSymbols[index];
+            // Validar nombre
+            if (currentName.length < 3) {
+                alert("Por favor, ingresa un nombre válido.");
+                return;
+            }
             
-            // Reveal the symbol
-            card.classList.add("scratched");
-            card.querySelector(".scratch-content").textContent = symbol;
+            // Validar número de teléfono
+            if (!/^\d{10}$/.test(currentPhone)) {
+                alert("Por favor, ingresa un número de teléfono válido de 10 dígitos.");
+                return;
+            }
             
-            gameState.scratchedCards++;
+            // Verificar intentos disponibles
+            if (phoneAttempts[currentPhone] >= 2) {
+                alert("Ya has utilizado tus 2 intentos con este número de teléfono.");
+                return;
+            }
             
-            // Check if all cards are scratched or if player has won
-            if (gameState.scratchedCards === 9 || checkWin()) {
-                gameState.gameOver = true;
+            // Inicializar intentos si es la primera vez
+            if (!phoneAttempts[currentPhone]) {
+                phoneAttempts[currentPhone] = 0;
+            }
+            
+            // Actualizar intentos restantes
+            attemptsLeft = 2 - phoneAttempts[currentPhone];
+            attemptsCount.textContent = attemptsLeft;
+            isFirstAttempt = (attemptsLeft === 2);
+            
+            // Mostrar pantalla de juego
+            loginScreen.style.display = 'none';
+            gameScreen.style.display = 'block';
+            
+            // Asegurarse de que el overlay esté visible
+            scratchOverlay.style.display = 'flex';
+            playAgainBtn.style.display = 'none';
+            claimBtn.style.display = 'none';
+        }
+        
+        // Revelar premio
+        function revealPrize() {
+            // Añadir efecto de rascado
+            scratchOverlay.classList.add('scratch-effect');
+            
+            // Incrementar contador de intentos para este teléfono
+            phoneAttempts[currentPhone]++;
+            
+            // Actualizar intentos restantes
+            attemptsLeft--;
+            attemptsCount.textContent = attemptsLeft;
+            
+            // Determinar si gana o pierde (28% probabilidad de ganar)
+            const isWinner = Math.random() < 0.28;
+            
+            if (isWinner) {
+                // Seleccionar premio basado en probabilidades
+                const prize = selectPrize();
+                currentPrize = prize.name;
+                currentPrizeObj = prize;
                 
-                setTimeout(() => {
-                    const hasWon = checkWin();
-                    
-                    if (hasWon) {
-                        // Show winner modal
-                        const prize = selectPrize();
-                        const folio = generateFolio();
-                        
-                        prizeNameElement.textContent = prize;
-                        prizeFolioElement.textContent = folio;
-                        prizeNameValueElement.textContent = gameState.playerName;
-                        prizePhoneElement.textContent = gameState.playerPhone;
-                        
-                        winnerModal.classList.remove("hidden");
-                    } else {
-                        // Show loser modal
-                        loserModal.classList.remove("hidden");
+                // Mostrar premio
+                scratchContent.innerHTML = `
+                    <div class="prize-icon">${prize.icon}</div>
+                    <div class="prize-text">${prize.name}</div>
+                    <div class="prize-description">${prize.description}</div>
+                `;
+            } else {
+                // No ganó
+                currentPrize = "No ganó";
+                currentPrizeObj = null;
+                
+                scratchContent.innerHTML = `
+                    <div class="prize-icon">😢</div>
+                    <div class="prize-text">¡Sigue intentando!</div>
+                    <div class="prize-description">No has ganado esta vez, pero no te rindas.</div>
+                `;
+            }
+            
+            // Ocultar overlay después de la animación
+            setTimeout(() => {
+                scratchOverlay.style.display = 'none';
+                scratchOverlay.classList.remove('scratch-effect');
+                
+                // Si ganó en el primer intento, mostrar modal de riesgo
+                if (isWinner && isFirstAttempt) {
+                    showRiskModal();
+                } else {
+                    // Mostrar botones según intentos restantes
+                    if (attemptsLeft > 0) {
+                        playAgainBtn.style.display = 'block';
                     }
                     
-                    // Decrement attempts
-                    gameState.attemptsLeft--;
-                    attemptsLeftSpan.textContent = gameState.attemptsLeft;
-                    
-                    // Show appropriate buttons
-                    if (gameState.attemptsLeft > 0) {
-                        playAgainButton.classList.remove("hidden");
-                    } else {
-                        restartGameButton.classList.remove("hidden");
-                    }
-                }, 500);
-            }
-        });
-    });
-    
-    // Add touch support for mobile devices
-    scratchCards.forEach(card => {
-        card.addEventListener("touchstart", function(e) {
-            e.preventDefault(); // Prevent scrolling when touching the card
-        });
-    });
-    
-    // Play again button
-    playAgainButton.addEventListener("click", function() {
-        playAgainButton.classList.add("hidden");
-        initGame();
-    });
-    
-    // Restart game button
-    restartGameButton.addEventListener("click", function() {
-        gameSection.classList.add("hidden");
-        loginSection.classList.remove("hidden");
-        restartGameButton.classList.add("hidden");
-        
-        // Reset form
-        loginForm.reset();
-    });
-    
-    // Close modal buttons
-    closeWinnerModalButton.addEventListener("click", function() {
-        winnerModal.classList.add("hidden");
-    });
-    
-    closeLoserModalButton.addEventListener("click", function() {
-        loserModal.classList.add("hidden");
-    });
-    
-    // Close modals when clicking outside
-    window.addEventListener("click", function(e) {
-        if (e.target === winnerModal) {
-            winnerModal.classList.add("hidden");
+                    claimBtn.style.display = 'block';
+                }
+            }, 500);
         }
-        if (e.target === loserModal) {
-            loserModal.classList.add("hidden");
-        }
-    });
-    
-    // Prevent zooming on mobile when focusing inputs
-    const viewportMeta = document.createElement('meta');
-    viewportMeta.name = 'viewport';
-    viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
-    document.getElementsByTagName('head')[0].appendChild(viewportMeta);
-    
-    // Añadir efecto de brillo al pasar el cursor por los cuadros
-    scratchCards.forEach(card => {
-        card.addEventListener("mouseover", function() {
-            if (!card.classList.contains("scratched")) {
-                card.querySelector(".scratch-cover").style.boxShadow = "0 0 15px rgba(255, 255, 255, 0.5), 0 6px 12px rgba(0, 0, 0, 0.15)";
-            }
-        });
         
-        card.addEventListener("mouseout", function() {
-            if (!card.classList.contains("scratched")) {
-                card.querySelector(".scratch-cover").style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.15)";
+        // Mostrar modal de riesgo
+        function showRiskModal() {
+            currentPrizeSpan.textContent = currentPrize;
+            riskModal.classList.add('active');
+        }
+        
+        // Tomar el riesgo de intentar un premio mayor
+        function takeRisk() {
+            // Cerrar modal
+            riskModal.classList.remove('active');
+            
+            // Determinar si gana o pierde (40% probabilidad de ganar)
+            const isWinner = Math.random() < 0.4;
+            
+            if (isWinner) {
+                // Seleccionar premio mayor
+                const majorPrize = selectMajorPrize();
+                currentPrize = majorPrize.name;
+                currentPrizeObj = majorPrize;
+                
+                // Mostrar premio mayor
+                scratchContent.innerHTML = `
+                    <div class="prize-icon">${majorPrize.icon}</div>
+                    <div class="prize-text">${majorPrize.name}</div>
+                    <div class="prize-description">${majorPrize.description}</div>
+                `;
+            } else {
+                // Perdió todo
+                currentPrize = "No ganó";
+                currentPrizeObj = null;
+                
+                scratchContent.innerHTML = `
+                    <div class="prize-icon">😭</div>
+                    <div class="prize-text">¡Lo sentimos!</div>
+                    <div class="prize-description">Has perdido tu premio al arriesgarte.</div>
+                `;
             }
-        });
+            
+            // Mostrar botón de reclamar
+            claimBtn.style.display = 'block';
+        }
+        
+        // Mantener el premio original
+        function keepPrize() {
+            // Cerrar modal
+            riskModal.classList.remove('active');
+            
+            // Mostrar botones según intentos restantes
+            if (attemptsLeft > 0) {
+                playAgainBtn.style.display = 'block';
+            }
+            
+            claimBtn.style.display = 'block';
+        }
+        
+        // Seleccionar premio basado en probabilidades
+        function selectPrize() {
+            const rand = Math.random();
+            let cumulativeProbability = 0;
+            
+            for (const prize of prizes) {
+                cumulativeProbability += prize.probability;
+                if (rand < cumulativeProbability) {
+                    return prize;
+                }
+            }
+            
+            // Por defecto, retornar el primer premio
+            return prizes[0];
+        }
+        
+        // Seleccionar premio mayor basado en probabilidades
+        function selectMajorPrize() {
+            const rand = Math.random();
+            let cumulativeProbability = 0;
+            
+            for (const prize of majorPrizes) {
+                cumulativeProbability += prize.probability;
+                if (rand < cumulativeProbability) {
+                    return prize;
+                }
+            }
+            
+            // Por defecto, retornar el primer premio mayor
+            return majorPrizes[0];
+        }
+        
+        // Resetear juego para segundo intento
+        function resetGame() {
+            scratchOverlay.style.display = 'flex';
+            playAgainBtn.style.display = 'none';
+            claimBtn.style.display = 'none';
+            isFirstAttempt = false;
+        }
+        
+        // Mostrar pantalla de resultado
+        function showResult() {
+            // Llenar datos de resultado
+            document.getElementById('result-name').textContent = currentName;
+            document.getElementById('result-phone').textContent = currentPhone;
+            document.getElementById('result-prize').textContent = currentPrize;
+            
+            // Generar folio aleatorio de 5 dígitos
+            const folio = generateFolio();
+            document.getElementById('result-folio').textContent = folio;
+            
+            // Mostrar pantalla de resultado
+            gameScreen.style.display = 'none';
+            resultScreen.style.display = 'block';
+        }
+        
+        // Generar folio aleatorio de 5 dígitos
+        function generateFolio() {
+            return Math.floor(10000 + Math.random() * 90000).toString();
+        }
+        
+        // Iniciar nuevo juego
+        function startNewGame() {
+            // Ocultar pantalla de resultado y mostrar pantalla de inicio
+            resultScreen.style.display = 'none';
+            loginScreen.style.display = 'block';
+            
+            // Limpiar campos
+            document.getElementById('phrase').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            
+            // Reiniciar variables
+            currentName = "";
+            currentPhone = "";
+            currentPrize = "";
+            currentPrizeObj = null;
+            isFirstAttempt = true;
+            
+            // Reiniciar el estado del juego
+            scratchOverlay.style.display = 'flex';
+            playAgainBtn.style.display = 'none';
+            claimBtn.style.display = 'none';
+        }
+        
+        // Seguridad básica
+        function addBasicSecurity() {
+            // Deshabilitar clic derecho
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            
+            // Deshabilitar algunas teclas de inspección
+            document.addEventListener('keydown', function(e) {
+                if (e.keyCode === 123) { // F12
+                    e.preventDefault();
+                }
+            });
+            
+            // Ofuscar la frase secreta
+            const _0x5a2c=['Yo\x20paseo\x20por\x20la\x20baja'];
+            (function(_0x2d8f05,_0x5a2c1a){const _0x4b81bb=function(_0x4d74cb){while(--_0x4d74cb){_0x2d8f05['push'](_0x2d8f05['shift']());}};_0x4b81bb(++_0x5a2c1a);}(_0x5a2c,0x16a));
+        }
+        
+        // Iniciar aplicación
+        init();
     });
 </script>
 </body>
