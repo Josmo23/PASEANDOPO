@@ -3,824 +3,582 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rascadito</title>
+    <title>Pares de Tours - Paseando por la Baja</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
     <style>
-     :root {
-        --primary: #FF6B35;
-        --secondary: #2EC4B6;
-        --accent: #FFBF69;
-        --dark: #011627;
-        --light: #FDFFFC;
-    }
-    
-    body {
-        font-family: 'Montserrat', sans-serif;
-        background: linear-gradient(135deg, var(--dark), #023E8A);
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
-        color: var(--light);
-    }
-    
-    .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-    
-    .card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        text-align: center;
-        margin-bottom: 20px;
-        color: var(--accent);
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    .subtitle {
-        font-size: 1.2rem;
-        text-align: center;
-        margin-bottom: 30px;
-        color: var(--light);
-    }
-    
-    .input-group {
-        margin-bottom: 20px;
-    }
-    
-    .input-label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-    }
-    
-    .input-field {
-        width: 100%;
-        padding: 12px 15px;
-        border-radius: 10px;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--light);
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-    
-    .input-field:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px rgba(255, 191, 105, 0.3);
-    }
-    
-    .btn {
-        display: block;
-        width: 100%;
-        padding: 15px;
-        border-radius: 10px;
-        border: none;
-        font-size: 1.1rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
-    .btn-primary {
-        background: var(--primary);
-        color: var(--light);
-        box-shadow: 0 4px 10px rgba(255, 107, 53, 0.4);
-    }
-    
-    .btn-primary:hover {
-        background: #FF8157;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(255, 107, 53, 0.5);
-    }
-    
-    .btn-secondary {
-        background: var(--secondary);
-        color: var(--light);
-        box-shadow: 0 4px 10px rgba(46, 196, 182, 0.4);
-    }
-    
-    .btn-secondary:hover {
-        background: #3DD6C8;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(46, 196, 182, 0.5);
-    }
-    
-    .btn-danger {
-        background: #e63946;
-        color: var(--light);
-        box-shadow: 0 4px 10px rgba(230, 57, 70, 0.4);
-    }
-    
-    .btn-danger:hover {
-        background: #f25c69;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(230, 57, 70, 0.5);
-    }
-    
-    .scratch-card {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        margin: 30px 0;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-    
-    .scratch-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, var(--primary), var(--secondary));
-        z-index: 10;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--light);
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        transition: transform 0.5s ease;
-    }
-    
-    .scratch-overlay:hover {
-        transform: scale(0.98);
-    }
-    
-    .scratch-overlay:active {
-        transform: scale(0.95);
-    }
-    
-    .scratch-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        color: var(--dark);
-        padding: 20px;
-    }
-    
-    .prize-icon {
-        font-size: 3rem;
-        margin-bottom: 15px;
-        animation: bounce 1s ease infinite;
-    }
-    
-    @keyframes bounce {
-        0%, 100% {
-            transform: translateY(0);
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #ffcc80 100%);
+            min-height: 100vh;
+            user-select: none;
         }
-        50% {
-            transform: translateY(-10px);
+        
+        .card {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
         }
-    }
-    
-    .prize-text {
-        font-size: 1.8rem;
-        font-weight: 700;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-    
-    .prize-description {
-        font-size: 1rem;
-        text-align: center;
-    }
-    
-    .result-card {
-        background: linear-gradient(135deg, var(--accent), var(--primary));
-        border-radius: 15px;
-        padding: 30px;
-        text-align: center;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        color: var(--dark);
-    }
-    
-    .result-title {
-        font-size: 2rem;
-        font-weight: 800;
-        margin-bottom: 20px;
-        color: var(--dark);
-    }
-    
-    .result-info {
-        margin-bottom: 15px;
-        font-size: 1.2rem;
-    }
-    
-    .result-folio {
-        font-size: 2rem;
-        font-weight: 700;
-        margin: 20px 0;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 10px;
-        letter-spacing: 3px;
-    }
-    
-    .result-instruction {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-top: 20px;
-    }
-    
-    .wave-bg {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 200px;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%232EC4B6' fill-opacity='0.5' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,202.7C672,203,768,181,864,181.3C960,181,1056,203,1152,202.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-        background-size: cover;
-        z-index: -1;
-    }
-    
-    .palm-tree {
-        position: fixed;
-        bottom: 0;
-        width: 150px;
-        height: 200px;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23795548' d='M45,40 L55,40 L55,100 L45,100 Z'/%3E%3Cpath fill='%234CAF50' d='M50,10 C60,25 80,15 70,35 C90,25 75,45 60,40 C75,50 65,60 50,45 C35,60 25,50 40,40 C25,45 10,25 30,35 C20,15 40,25 50,10 Z'/%3E%3C/svg%3E");
-        background-size: contain;
-        background-repeat: no-repeat;
-        z-index: -1;
-        opacity: 0.7;
-    }
-    
-    .palm-left {
-        left: 5%;
-    }
-    
-    .palm-right {
-        right: 5%;
-        transform: scaleX(-1);
-    }
-    
-    .scratch-effect {
-        animation: scratch 0.5s ease-out;
-    }
-    
-    @keyframes scratch {
-        0% {
-            opacity: 1;
-            transform: translateY(0) rotate(0);
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
         }
-        100% {
-            opacity: 0;
-            transform: translateY(-20px) rotate(-5deg);
+        
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
         }
-    }
-    
-    .modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 100;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-    }
-    
-    .modal.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .modal-content {
-        background: linear-gradient(135deg, var(--dark), #023E8A);
-        border-radius: 15px;
-        padding: 30px;
-        width: 90%;
-        max-width: 500px;
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transform: translateY(20px);
-        transition: all 0.3s ease;
-    }
-    
-    .modal.active .modal-content {
-        transform: translateY(0);
-    }
-    
-    .modal-title {
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin-bottom: 15px;
-        color: var(--accent);
-        text-align: center;
-    }
-    
-    .modal-text {
-        font-size: 1.1rem;
-        margin-bottom: 25px;
-        text-align: center;
-        line-height: 1.6;
-    }
-    
-    .modal-buttons {
-        display: flex;
-        gap: 15px;
-    }
-    
-    .modal-btn {
-        flex: 1;
-        padding: 12px;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-align: center;
-    }
-    
-    .modal-btn-primary {
-        background: var(--primary);
-        color: var(--light);
-    }
-    
-    .modal-btn-secondary {
-        background: var(--secondary);
-        color: var(--light);
-    }
-    
-    .prize-highlight {
-        font-weight: 700;
-        color: var(--primary);
-        font-size: 1.2rem;
-    }
-    
-    @media (max-width: 640px) {
-        .title {
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+        }
+        
+        .card-front {
+            background: linear-gradient(45deg, #ff9a00, #ff6b6b);
+            transform: rotateY(180deg);
             font-size: 2rem;
         }
         
-        .subtitle {
-            font-size: 1rem;
+        .card-back {
+            background: linear-gradient(45deg, #0099ff, #4d79ff);
+            color: white;
+            font-weight: bold;
         }
         
-        .scratch-card {
-            height: 250px;
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         
-        .palm-tree {
-            width: 100px;
-            height: 150px;
+        .celebrate {
+            animation: celebrate 0.5s ease-in-out 2;
         }
         
-        .modal-title {
-            font-size: 1.5rem;
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
         }
         
-        .modal-text {
-            font-size: 1rem;
+        @keyframes fall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
-        
-        .modal-buttons {
-            flex-direction: column;
-        }
-    }
-</style>
-<div class="container py-8">
-    <div id="login-screen" class="card">
-        <h1 class="title">Paseando por la Baja</h1>
-        <p class="subtitle">¡Rasca y gana increíbles premios!</p>
-        
-        <div class="input-group">
-            <label for="phrase" class="input-label">Ingresa la frase secreta:</label>
-            <input type="text" id="phrase" class="input-field" placeholder="Escribe la frase secreta...">
+    </style>
+</head>
+<body class="p-4" oncontextmenu="return false;">
+    <div class="max-w-4xl mx-auto">
+        <div id="welcome-screen" class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h1 class="text-3xl font-bold text-center text-amber-600 mb-4">Pares de Tours - Paseando por la Baja</h1>
+            <p class="text-center mb-6">Encuentra 2 pares de emojis y gana increíbles premios</p>
+            
+            <form id="start-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nombre completo:</label>
+                    <input type="text" id="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500">
+                </div>
+                
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Número de teléfono:</label>
+                    <input type="tel" id="phone" required pattern="[0-9]{10}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500">
+                    <p class="text-xs text-gray-500 mt-1">Formato: 10 dígitos</p>
+                </div>
+                
+                <div>
+                    <label for="secret" class="block text-sm font-medium text-gray-700">Frase secreta:</label>
+                    <input type="text" id="secret" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500">
+                </div>
+                
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-md transition duration-300">¡Comenzar a jugar!</button>
+            </form>
         </div>
         
-        <div class="input-group">
-            <label for="name" class="input-label">Nombre completo:</label>
-            <input type="text" id="name" class="input-field" placeholder="Tu nombre...">
+        <div id="game-container" class="hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h1 class="text-3xl font-bold text-center text-amber-600 mb-2">Pares de Tours - Paseando por la Baja</h1>
+                <p class="text-center mb-2">Encuentra 2 pares de emojis en solo 4 intentos</p>
+                <p class="text-center text-sm text-amber-700 mb-4">¡Cuidado! Solo tienes 4 cartas para voltear</p>
+                <p id="player-info" class="text-center text-sm text-gray-600 mb-4"></p>
+                
+                <div class="flex justify-center space-x-4 mb-4">
+                    <div class="bg-amber-100 rounded-lg px-4 py-2">
+                        <p class="text-amber-800">Pares encontrados: <span id="pairs-found" class="font-bold">0</span>/2</p>
+                    </div>
+                    <div class="bg-red-100 rounded-lg px-4 py-2">
+                        <p class="text-red-800">Intentos restantes: <span id="flips-left" class="font-bold">4</span></p>
+                    </div>
+                </div>
+                
+                <div id="game-board" class="grid grid-cols-4 gap-4 mb-6">
+                    <!-- Cards will be generated here -->
+                </div>
+                
+                <div class="text-center">
+                    <button id="restart-btn" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-md transition duration-300">Reiniciar juego</button>
+                </div>
+            </div>
         </div>
         
-        <div class="input-group">
-            <label for="phone" class="input-label">Número de teléfono (10 dígitos):</label>
-            <input type="tel" id="phone" class="input-field" placeholder="Tu número de teléfono..." maxlength="10">
+        <div id="result-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+                <div id="win-message" class="hidden">
+                    <div class="text-center mb-4">
+                        <span class="text-5xl">🎉</span>
+                        <h2 class="text-2xl font-bold text-green-600 mt-2">¡Felicidades! ¡Has ganado!</h2>
+                    </div>
+                    <div id="prize-details" class="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg"></div>
+                    <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <h3 class="font-bold text-blue-800 mb-2">Información del ganador:</h3>
+                        <p id="winner-info" class="text-blue-700"></p>
+                        <p id="folio" class="font-bold text-blue-800 mt-2"></p>
+                        <p id="date" class="text-sm text-blue-600 mt-1"></p>
+                    </div>
+                    <p class="text-center font-bold text-red-600 mb-4">¡Toma una captura de pantalla para cobrar tu premio!</p>
+                    <p class="text-center text-sm mb-4">Y recuerda seguir Paseando por la Baja</p>
+                </div>
+                
+                <div id="lose-message" class="hidden">
+                    <div class="text-center mb-4">
+                        <span class="text-5xl">😊</span>
+                        <h2 class="text-2xl font-bold text-amber-600 mt-2">¡Gracias por participar!</h2>
+                        <p class="mt-2">Suerte para la próxima</p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="close-modal" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-md transition duration-300">Cerrar</button>
+                </div>
+            </div>
         </div>
-        
-        <button id="start-btn" class="btn btn-primary">Comenzar</button>
     </div>
-    
-    <div id="game-screen" class="card" style="display: none;">
-        <h1 class="title">Paseando por la Baja</h1>
-        <p class="subtitle">¡Rasca la tarjeta para descubrir tu premio!</p>
-        
-        <div id="scratch-card" class="scratch-card">
-            <div id="scratch-overlay" class="scratch-overlay">
-                <span>¡RASCA AQUÍ!</span>
-            </div>
-            <div id="scratch-content" class="scratch-content">
-                <!-- El contenido se llenará dinámicamente -->
-            </div>
-        </div>
-        
-        <p id="attempts-left" class="text-center mb-4">Intentos restantes: <span id="attempts-count">2</span></p>
-        
-        <button id="play-again-btn" class="btn btn-secondary mb-4" style="display: none;">Jugar de nuevo</button>
-        <button id="claim-btn" class="btn btn-primary" style="display: none;">Reclamar premio</button>
-    </div>
-    
-    <div id="result-screen" class="card" style="display: none;">
-        <div class="result-card">
-            <h2 class="result-title">¡Toma una captura de pantalla!</h2>
-            
-            <div class="result-info">
-                <strong>Nombre:</strong> <span id="result-name"></span>
-            </div>
-            
-            <div class="result-info">
-                <strong>Teléfono:</strong> <span id="result-phone"></span>
-            </div>
-            
-            <div class="result-info">
-                <strong>Premio:</strong> <span id="result-prize"></span>
-            </div>
-            
-            <div class="result-folio" id="result-folio"></div>
-            
-            <p class="result-instruction">Presenta esta captura para reclamar tu premio</p>
-        </div>
-        
-        <button id="new-game-btn" class="btn btn-secondary mt-6">Nuevo juego</button>
-    </div>
-    
-    <!-- Modal para preguntar si quiere arriesgarse -->
-    <div id="risk-modal" class="modal">
-        <div class="modal-content">
-            <h3 class="modal-title">¡Felicidades! Has ganado un premio</h3>
-            <p class="modal-text">
-                Has ganado: <span id="current-prize" class="prize-highlight"></span>
-                <br><br>
-                ¿Quieres arriesgarte a intentar ganar un premio mayor?
-                <br><br>
-                <strong>¡Cuidado!</strong> Si pierdes, no ganarás nada.
-            </p>
-            <div class="modal-buttons">
-                <button id="risk-yes-btn" class="modal-btn modal-btn-primary">¡Sí, quiero arriesgarme!</button>
-                <button id="risk-no-btn" class="modal-btn modal-btn-secondary">No, me quedo con mi premio</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Variables globales
-        const correctPhrase = "Yo paseo por la baja";
-        const phoneAttempts = {};
-        let currentPhone = "";
-        let currentName = "";
-        let attemptsLeft = 2;
-        let currentPrize = "";
-        let currentPrizeObj = null;
-        let isFirstAttempt = true;
-        
-        // Elementos DOM
-        const loginScreen = document.getElementById('login-screen');
-        const gameScreen = document.getElementById('game-screen');
-        const resultScreen = document.getElementById('result-screen');
-        const startBtn = document.getElementById('start-btn');
-        const scratchOverlay = document.getElementById('scratch-overlay');
-        const scratchContent = document.getElementById('scratch-content');
-        const attemptsCount = document.getElementById('attempts-count');
-        const playAgainBtn = document.getElementById('play-again-btn');
-        const claimBtn = document.getElementById('claim-btn');
-        const newGameBtn = document.getElementById('new-game-btn');
-        const riskModal = document.getElementById('risk-modal');
-        const currentPrizeSpan = document.getElementById('current-prize');
-        const riskYesBtn = document.getElementById('risk-yes-btn');
-        const riskNoBtn = document.getElementById('risk-no-btn');
-        
-        // Premios disponibles
-        const prizes = [
-            { name: "50 pesos de descuento", probability: 0.12, icon: "💰", description: "¡Felicidades! Has ganado $50 de descuento en tu próxima compra.", value: 1 },
-            { name: "100 pesos de descuento", probability: 0.08, icon: "💵", description: "¡Increíble! Has ganado $100 de descuento en tu próxima compra.", value: 2 },
-            { name: "Paseo en barco", probability: 0.03, icon: "🚢", description: "¡Wow! Has ganado un paseo en barco para disfrutar del mar.", value: 3 },
-            { name: "Vino gratis", probability: 0.03, icon: "🍷", description: "¡Salud! Has ganado una botella de vino para brindar.", value: 3 },
-            { name: "¡VIAJE GRATIS!", probability: 0.02, icon: "✈️", description: "¡FELICIDADES! Has ganado el PREMIO MAYOR: ¡Un viaje gratis!", value: 5 }
-        ];
-        
-        // Premios mayores para el segundo intento
-        const majorPrizes = [
-            { name: "¡VIAJE GRATIS!", probability: 0.3, icon: "✈️", description: "¡FELICIDADES! Has ganado el PREMIO MAYOR: ¡Un viaje gratis!", value: 5 },
-            { name: "Cena para dos", probability: 0.3, icon: "🍽️", description: "¡Excelente! Has ganado una cena romántica para dos personas.", value: 4 },
-            { name: "Tour completo", probability: 0.4, icon: "🏞️", description: "¡Genial! Has ganado un tour completo por La Baja.", value: 4 }
-        ];
-        
-        // Inicializar eventos
-        function init() {
-            startBtn.addEventListener('click', validateAndStart);
-            scratchOverlay.addEventListener('click', revealPrize);
-            playAgainBtn.addEventListener('click', resetGame);
-            claimBtn.addEventListener('click', showResult);
-            newGameBtn.addEventListener('click', startNewGame);
-            riskYesBtn.addEventListener('click', takeRisk);
-            riskNoBtn.addEventListener('click', keepPrize);
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Prevent right-click
+            document.addEventListener('contextmenu', event => event.preventDefault());
             
-            // Seguridad básica
-            addBasicSecurity();
-        }
-        
-        // Validar datos y comenzar juego
-        function validateAndStart() {
-            const phraseInput = document.getElementById('phrase').value.trim();
-            currentName = document.getElementById('name').value.trim();
-            currentPhone = document.getElementById('phone').value.trim();
+            // Game variables
+            let cards = [];
+            let flippedCards = [];
+            let matchedPairs = 0;
+            let canFlip = true;
+            let playerName = '';
+            let playerPhone = '';
+            let foundPairTypes = [];
+            let totalFlips = 0;
+            let gameEnded = false;
+            const MAX_FLIPS = 4;
             
-            // Validar frase secreta
-            if (phraseInput.toLowerCase() !== correctPhrase.toLowerCase()) {
-                alert("Frase secreta incorrecta. Inténtalo de nuevo.");
-                return;
-            }
+            // Emojis and their probabilities
+            const emojis = [
+                { symbol: '💰', name: 'dinero', probability: 0.25 },
+                { symbol: '🍷', name: 'vino', probability: 0.05 },  // Reduced from 10% to 5%
+                { symbol: '✈️', name: 'avion', probability: 0.01 },
+                { symbol: '🚢', name: 'barco', probability: 0.05 },
+                { symbol: '🎁', name: 'regalo', probability: 0.64 }  // Increased to maintain total of 100%
+            ];
             
-            // Validar nombre
-            if (currentName.length < 3) {
-                alert("Por favor, ingresa un nombre válido.");
-                return;
-            }
+            // Prizes for money pair
+            const moneyPrizes = [
+                { description: '30 pesos de descuento', probability: 0.50 },
+                { description: '70 pesos de descuento', probability: 0.30 },
+                { description: '100 pesos de descuento', probability: 0.20 }
+            ];
             
-            // Validar número de teléfono
-            if (!/^\d{10}$/.test(currentPhone)) {
-                alert("Por favor, ingresa un número de teléfono válido de 10 dígitos.");
-                return;
-            }
+            // Surprise prizes for gift pair (10% chance of winning)
+            const surprisePrizes = [
+                { description: 'Recuerdo de Baja California', probability: 0.50 },
+                { description: 'Souvenir exclusivo', probability: 0.30 },
+                { description: 'Artesanía local', probability: 0.20 }
+            ];
             
-            // Verificar intentos disponibles
-            if (phoneAttempts[currentPhone] >= 2) {
-                alert("Ya has utilizado tus 2 intentos con este número de teléfono.");
-                return;
-            }
-            
-            // Inicializar intentos si es la primera vez
-            if (!phoneAttempts[currentPhone]) {
-                phoneAttempts[currentPhone] = 0;
-            }
-            
-            // Actualizar intentos restantes
-            attemptsLeft = 2 - phoneAttempts[currentPhone];
-            attemptsCount.textContent = attemptsLeft;
-            isFirstAttempt = (attemptsLeft === 2);
-            
-            // Mostrar pantalla de juego
-            loginScreen.style.display = 'none';
-            gameScreen.style.display = 'block';
-            
-            // Asegurarse de que el overlay esté visible
-            scratchOverlay.style.display = 'flex';
-            playAgainBtn.style.display = 'none';
-            claimBtn.style.display = 'none';
-        }
-        
-        // Revelar premio
-        function revealPrize() {
-            // Añadir efecto de rascado
-            scratchOverlay.classList.add('scratch-effect');
-            
-            // Incrementar contador de intentos para este teléfono
-            phoneAttempts[currentPhone]++;
-            
-            // Actualizar intentos restantes
-            attemptsLeft--;
-            attemptsCount.textContent = attemptsLeft;
-            
-            // Determinar si gana o pierde (28% probabilidad de ganar)
-            const isWinner = Math.random() < 0.28;
-            
-            if (isWinner) {
-                // Seleccionar premio basado en probabilidades
-                const prize = selectPrize();
-                currentPrize = prize.name;
-                currentPrizeObj = prize;
+            // Start form submission
+            document.getElementById('start-form').addEventListener('submit', (e) => {
+                e.preventDefault();
                 
-                // Mostrar premio
-                scratchContent.innerHTML = `
-                    <div class="prize-icon">${prize.icon}</div>
-                    <div class="prize-text">${prize.name}</div>
-                    <div class="prize-description">${prize.description}</div>
-                `;
-            } else {
-                // No ganó
-                currentPrize = "No ganó";
-                currentPrizeObj = null;
+                const secretPhrase = document.getElementById('secret').value.trim().toLowerCase();
+                if (secretPhrase !== 'yo paseo por la baja') {
+                    alert('La frase secreta es incorrecta. Inténtalo de nuevo.');
+                    return;
+                }
                 
-                scratchContent.innerHTML = `
-                    <div class="prize-icon">😢</div>
-                    <div class="prize-text">¡Sigue intentando!</div>
-                    <div class="prize-description">No has ganado esta vez, pero no te rindas.</div>
-                `;
-            }
+                playerName = document.getElementById('name').value.trim();
+                playerPhone = document.getElementById('phone').value.trim();
+                
+                document.getElementById('welcome-screen').classList.add('hidden');
+                document.getElementById('game-container').classList.remove('hidden');
+                document.getElementById('player-info').textContent = `Jugador: ${playerName} | Teléfono: ${playerPhone}`;
+                
+                initializeGame();
+            });
             
-            // Ocultar overlay después de la animación
-            setTimeout(() => {
-                scratchOverlay.style.display = 'none';
-                scratchOverlay.classList.remove('scratch-effect');
+            // Initialize the game
+            function initializeGame() {
+                const gameBoard = document.getElementById('game-board');
+                gameBoard.innerHTML = '';
+                cards = [];
+                flippedCards = [];
+                matchedPairs = 0;
+                foundPairTypes = [];
+                canFlip = true;
+                totalFlips = 0;
+                gameEnded = false;
                 
-                // Si ganó en el primer intento, mostrar modal de riesgo
-                if (isWinner && isFirstAttempt) {
-                    showRiskModal();
-                } else {
-                    // Mostrar botones según intentos restantes
-                    if (attemptsLeft > 0) {
-                        playAgainBtn.style.display = 'block';
+                document.getElementById('pairs-found').textContent = '0';
+                document.getElementById('flips-left').textContent = MAX_FLIPS;
+                
+                // Determine if this game should be winnable (25% chance)
+                const isWinnableGame = Math.random() <= 0.25;
+                
+                // Create a deck with 8 pairs (16 cards)
+                const deck = [];
+                
+                if (isWinnableGame) {
+                    // Create a winnable game by ensuring pairs are close to each other
+                    // Select 2 emoji types for the pairs the player should find
+                    const winningEmojis = [];
+                    for (let i = 0; i < 2; i++) {
+                        const emoji = selectWeightedRandom(emojis);
+                        winningEmojis.push(emoji);
                     }
                     
-                    claimBtn.style.display = 'block';
+                    // Create the winning pairs and place them in strategic positions
+                    const strategicPositions = [0, 1, 4, 5]; // Top-left positions
+                    
+                    // Fill the rest of the deck with random pairs
+                    const fillerEmojis = [];
+                    for (let i = 0; i < 6; i++) {
+                        const emoji = selectWeightedRandom(emojis);
+                        fillerEmojis.push(emoji);
+                    }
+                    
+                    // Create the full deck
+                    const fullDeck = [];
+                    
+                    // Add winning pairs
+                    fullDeck.push(winningEmojis[0], winningEmojis[0]);
+                    fullDeck.push(winningEmojis[1], winningEmojis[1]);
+                    
+                    // Add filler pairs
+                    fillerEmojis.forEach(emoji => {
+                        fullDeck.push(emoji, emoji);
+                    });
+                    
+                    // Shuffle the deck but ensure winning pairs are somewhat close
+                    shuffleArray(fullDeck);
+                    
+                    // Ensure at least one winning pair is in an easy-to-find position
+                    const winningPair1 = [fullDeck[0], fullDeck[0]];
+                    const winningPair2 = [fullDeck[1], fullDeck[1]];
+                    
+                    // Place winning pairs in strategic positions
+                    deck[strategicPositions[0]] = winningPair1[0];
+                    deck[strategicPositions[1]] = winningPair1[1];
+                    
+                    // Fill the rest of the deck
+                    let fillerIndex = 0;
+                    for (let i = 0; i < 16; i++) {
+                        if (!deck[i]) {
+                            if (fillerIndex < fullDeck.length) {
+                                deck[i] = fullDeck[fillerIndex];
+                                fillerIndex++;
+                            }
+                        }
+                    }
+                } else {
+                    // Create a more challenging game
+                    // First, select emojis based on weighted probability
+                    const selectedEmojis = [];
+                    for (let i = 0; i < 8; i++) {
+                        const emoji = selectWeightedRandom(emojis);
+                        selectedEmojis.push(emoji);
+                    }
+                    
+                    // Create pairs
+                    selectedEmojis.forEach(emoji => {
+                        deck.push(emoji, emoji);
+                    });
+                    
+                    // Shuffle the deck to make it more challenging
+                    shuffleArray(deck);
+                    shuffleArray(deck); // Double shuffle for more randomness
                 }
-            }, 500);
-        }
-        
-        // Mostrar modal de riesgo
-        function showRiskModal() {
-            currentPrizeSpan.textContent = currentPrize;
-            riskModal.classList.add('active');
-        }
-        
-        // Tomar el riesgo de intentar un premio mayor
-        function takeRisk() {
-            // Cerrar modal
-            riskModal.classList.remove('active');
-            
-            // Determinar si gana o pierde (40% probabilidad de ganar)
-            const isWinner = Math.random() < 0.4;
-            
-            if (isWinner) {
-                // Seleccionar premio mayor
-                const majorPrize = selectMajorPrize();
-                currentPrize = majorPrize.name;
-                currentPrizeObj = majorPrize;
                 
-                // Mostrar premio mayor
-                scratchContent.innerHTML = `
-                    <div class="prize-icon">${majorPrize.icon}</div>
-                    <div class="prize-text">${majorPrize.name}</div>
-                    <div class="prize-description">${majorPrize.description}</div>
-                `;
-            } else {
-                // Perdió todo
-                currentPrize = "No ganó";
-                currentPrizeObj = null;
+                // Create cards
+                deck.forEach((emoji, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'card aspect-square';
+                    card.dataset.index = index;
+                    card.dataset.emoji = emoji.symbol;
+                    card.dataset.name = emoji.name;
+                    
+                    card.innerHTML = `
+                        <div class="card-inner h-full">
+                            <div class="card-back">
+                                <span class="text-xl">?</span>
+                            </div>
+                            <div class="card-front">
+                                <span>${emoji.symbol}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    card.addEventListener('click', () => flipCard(card));
+                    gameBoard.appendChild(card);
+                    cards.push(card);
+                });
+            }
+            
+            // Flip a card
+            function flipCard(card) {
+                if (!canFlip || card.classList.contains('flipped') || flippedCards.length >= 2 || totalFlips >= MAX_FLIPS || gameEnded) return;
                 
-                scratchContent.innerHTML = `
-                    <div class="prize-icon">😭</div>
-                    <div class="prize-text">¡Lo sentimos!</div>
-                    <div class="prize-description">Has perdido tu premio al arriesgarte.</div>
-                `;
-            }
-            
-            // Mostrar botón de reclamar
-            claimBtn.style.display = 'block';
-        }
-        
-        // Mantener el premio original
-        function keepPrize() {
-            // Cerrar modal
-            riskModal.classList.remove('active');
-            
-            // Mostrar botones según intentos restantes
-            if (attemptsLeft > 0) {
-                playAgainBtn.style.display = 'block';
-            }
-            
-            claimBtn.style.display = 'block';
-        }
-        
-        // Seleccionar premio basado en probabilidades
-        function selectPrize() {
-            const rand = Math.random();
-            let cumulativeProbability = 0;
-            
-            for (const prize of prizes) {
-                cumulativeProbability += prize.probability;
-                if (rand < cumulativeProbability) {
-                    return prize;
+                card.classList.add('flipped');
+                flippedCards.push(card);
+                totalFlips++;
+                
+                // Update flips counter
+                document.getElementById('flips-left').textContent = MAX_FLIPS - totalFlips;
+                
+                if (flippedCards.length === 2) {
+                    canFlip = false;
+                    checkForMatch();
+                }
+                
+                // Check if all flips are used
+                if (totalFlips >= MAX_FLIPS && matchedPairs < 2) {
+                    gameEnded = true;
+                    setTimeout(() => {
+                        showLoseMessage();
+                    }, 1000);
                 }
             }
             
-            // Por defecto, retornar el primer premio
-            return prizes[0];
-        }
-        
-        // Seleccionar premio mayor basado en probabilidades
-        function selectMajorPrize() {
-            const rand = Math.random();
-            let cumulativeProbability = 0;
-            
-            for (const prize of majorPrizes) {
-                cumulativeProbability += prize.probability;
-                if (rand < cumulativeProbability) {
-                    return prize;
+            // Check if the flipped cards match
+            function checkForMatch() {
+                const [card1, card2] = flippedCards;
+                
+                if (card1.dataset.emoji === card2.dataset.emoji) {
+                    // Match found
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    
+                    // Add the pair type to found pairs
+                    foundPairTypes.push(card1.dataset.name);
+                    
+                    // Update matched pairs counter
+                    matchedPairs++;
+                    document.getElementById('pairs-found').textContent = matchedPairs;
+                    
+                    flippedCards = [];
+                    
+                    setTimeout(() => {
+                        card1.querySelector('.card-front').classList.add('celebrate');
+                        card2.querySelector('.card-front').classList.add('celebrate');
+                        
+                        if (matchedPairs === 2) {
+                            // Found 2 pairs, check for prize
+                            gameEnded = true;
+                            setTimeout(() => {
+                                checkPrize();
+                            }, 1000);
+                        } else {
+                            canFlip = true;
+                        }
+                    }, 500);
+                } else {
+                    // No match
+                    setTimeout(() => {
+                        card1.classList.remove('flipped');
+                        card2.classList.remove('flipped');
+                        flippedCards = [];
+                        canFlip = true;
+                    }, 1000);
                 }
             }
             
-            // Por defecto, retornar el primer premio mayor
-            return majorPrizes[0];
-        }
-        
-        // Resetear juego para segundo intento
-        function resetGame() {
-            scratchOverlay.style.display = 'flex';
-            playAgainBtn.style.display = 'none';
-            claimBtn.style.display = 'none';
-            isFirstAttempt = false;
-        }
-        
-        // Mostrar pantalla de resultado
-        function showResult() {
-            // Llenar datos de resultado
-            document.getElementById('result-name').textContent = currentName;
-            document.getElementById('result-phone').textContent = currentPhone;
-            document.getElementById('result-prize').textContent = currentPrize;
+            // Show lose message when all flips are used without finding 2 pairs
+            function showLoseMessage() {
+                const resultModal = document.getElementById('result-modal');
+                const winMessage = document.getElementById('win-message');
+                const loseMessage = document.getElementById('lose-message');
+                
+                winMessage.classList.add('hidden');
+                loseMessage.classList.remove('hidden');
+                resultModal.classList.remove('hidden');
+            }
             
-            // Generar folio aleatorio de 5 dígitos
-            const folio = generateFolio();
-            document.getElementById('result-folio').textContent = folio;
+            // Check if the player won a prize based on the found pairs
+            function checkPrize() {
+                const resultModal = document.getElementById('result-modal');
+                const winMessage = document.getElementById('win-message');
+                const loseMessage = document.getElementById('lose-message');
+                const prizeDetails = document.getElementById('prize-details');
+                
+                // Check if any of the found pairs are prize-winning types
+                let prize = '';
+                let hasWon = false;
+                
+                // Check for special pairs in order of priority
+                if (foundPairTypes.includes('dinero')) {
+                    const moneyPrize = selectWeightedRandom(moneyPrizes);
+                    prize = `<h3 class="font-bold text-green-600 mb-2">¡Has ganado!</h3>
+                            <p class="text-lg">💰 ${moneyPrize.description}</p>`;
+                    hasWon = true;
+                } else if (foundPairTypes.includes('avion')) {
+                    prize = `<h3 class="font-bold text-green-600 mb-2">¡Has ganado!</h3>
+                            <p class="text-lg">✈️ Viaje gratis a Ruta del Vino</p>`;
+                    hasWon = true;
+                } else if (foundPairTypes.includes('barco')) {
+                    prize = `<h3 class="font-bold text-green-600 mb-2">¡Has ganado!</h3>
+                            <p class="text-lg">🚢 Paseo gratis en barco</p>`;
+                    hasWon = true;
+                } else if (foundPairTypes.includes('vino')) {
+                    prize = `<h3 class="font-bold text-green-600 mb-2">¡Has ganado!</h3>
+                            <p class="text-lg">🍷 Una botella de vino</p>`;
+                    hasWon = true;
+                } else if (foundPairTypes.includes('regalo')) {
+                    // 10% chance of winning a surprise prize
+                    if (Math.random() <= 0.10) {
+                        const surprisePrize = selectWeightedRandom(surprisePrizes);
+                        prize = `<h3 class="font-bold text-green-600 mb-2">¡Has ganado!</h3>
+                                <p class="text-lg">🎁 Premio sorpresa: ${surprisePrize.description}</p>`;
+                        hasWon = true;
+                    } else {
+                        hasWon = false;
+                    }
+                }
+                document.addEventListener('keydown', function(e) {
+    // Bloquear F12, Ctrl+Shift+I, Ctrl+U, etc.
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+        (e.ctrlKey && e.key === 'U')) {
+        e.preventDefault();
+        alert('Acceso denegado');
+    }
+});
+// Detectar si las herramientas de desarrollo están abiertas
+setInterval(function() {
+    if (window.outerWidth - window.innerWidth > 100 || 
+        window.outerHeight - window.innerHeight > 100) {
+        document.body.innerHTML = 'Acceso denegado';
+        window.close();
+    }
+}, 1000);
+                if (hasWon) {
+                    // Generate folio
+                    const folio = generateFolio();
+                    const currentDate = new Date().toLocaleDateString('es-MX');
+                    
+                    prizeDetails.innerHTML = prize;
+                    document.getElementById('winner-info').textContent = `${playerName} - ${playerPhone}`;
+                    document.getElementById('folio').textContent = `Folio: ${folio}`;
+                    document.getElementById('date').textContent = `Fecha: ${currentDate}`;
+                    
+                    winMessage.classList.remove('hidden');
+                    loseMessage.classList.add('hidden');
+                    createConfetti();
+                } else {
+                    winMessage.classList.add('hidden');
+                    loseMessage.classList.remove('hidden');
+                }
+                
+                resultModal.classList.remove('hidden');
+            }
             
-            // Mostrar pantalla de resultado
-            gameScreen.style.display = 'none';
-            resultScreen.style.display = 'block';
-        }
-        
-        // Generar folio aleatorio de 5 dígitos
-        function generateFolio() {
-            return Math.floor(10000 + Math.random() * 90000).toString();
-        }
-        
-        // Iniciar nuevo juego
-        function startNewGame() {
-            // Ocultar pantalla de resultado y mostrar pantalla de inicio
-            resultScreen.style.display = 'none';
-            loginScreen.style.display = 'block';
+            // Generate a random folio number
+            function generateFolio() {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                let folio = '';
+                for (let i = 0; i < 8; i++) {
+                    folio += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return folio;
+            }
             
-            // Limpiar campos
-            document.getElementById('phrase').value = '';
-            document.getElementById('name').value = '';
-            document.getElementById('phone').value = '';
+            // Create confetti effect
+            function createConfetti() {
+                const container = document.body;
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animation = `fall ${1 + Math.random() * 3}s linear forwards`;
+                    confetti.style.animationDelay = `${Math.random() * 2}s`;
+                    container.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
             
-            // Reiniciar variables
-            currentName = "";
-            currentPhone = "";
-            currentPrize = "";
-            currentPrizeObj = null;
-            isFirstAttempt = true;
+            // Select a random item based on weighted probability
+            function selectWeightedRandom(items) {
+                const totalWeight = items.reduce((sum, item) => sum + item.probability, 0);
+                let random = Math.random() * totalWeight;
+                
+                for (const item of items) {
+                    random -= item.probability;
+                    if (random <= 0) {
+                        return item;
+                    }
+                }
+                
+                return items[0]; // Fallback
+            }
             
-            // Reiniciar el estado del juego
-            scratchOverlay.style.display = 'flex';
-            playAgainBtn.style.display = 'none';
-            claimBtn.style.display = 'none';
-        }
-        
-        // Seguridad básica
-        function addBasicSecurity() {
-            // Deshabilitar clic derecho
-            document.addEventListener('contextmenu', e => e.preventDefault());
+            // Shuffle array (Fisher-Yates algorithm)
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
             
-            // Deshabilitar algunas teclas de inspección
-            document.addEventListener('keydown', function(e) {
-                if (e.keyCode === 123) { // F12
-                    e.preventDefault();
+            // Close modal and restart game
+            document.getElementById('close-modal').addEventListener('click', () => {
+                document.getElementById('result-modal').classList.add('hidden');
+                
+                // Only allow continuing if the player lost (didn't find 2 pairs or ran out of attempts)
+                if (matchedPairs < 2 || totalFlips >= MAX_FLIPS) {
+                    initializeGame();
+                } else {
+                    // If player won, redirect to welcome screen
+                    document.getElementById('game-container').classList.add('hidden');
+                    document.getElementById('welcome-screen').classList.remove('hidden');
+                    document.getElementById('name').value = '';
+                    document.getElementById('phone').value = '';
+                    document.getElementById('secret').value = '';
                 }
             });
             
-            // Ofuscar la frase secreta
-            const _0x5a2c=['Yo\x20paseo\x20por\x20la\x20baja'];
-            (function(_0x2d8f05,_0x5a2c1a){const _0x4b81bb=function(_0x4d74cb){while(--_0x4d74cb){_0x2d8f05['push'](_0x2d8f05['shift']());}};_0x4b81bb(++_0x5a2c1a);}(_0x5a2c,0x16a));
-        }
-        
-        // Iniciar aplicación
-        init();
-    });
-</script>
+            // Restart button
+            document.getElementById('restart-btn').addEventListener('click', () => {
+                // Only allow restarting if the player hasn't won yet
+                if (!gameEnded) {
+                    initializeGame();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
